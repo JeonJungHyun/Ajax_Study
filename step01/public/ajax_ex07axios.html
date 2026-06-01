@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.16.1/dist/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="loadHandler(this)">불러오기</button>
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>user-id</th>
+                <th>id</th>
+                <th>title</th>
+                <th>completed</th>
+            </tr>
+        </thead>
+        <tbody id="todo-list-area"></tbody>
+    </table>
+
+    <script>
+        const loadHandler = async function (target) {
+            const url = "https://jsonplaceholder.typicode.com/todos";
+
+            const response = await axios.get(url );
+
+            console.log(response);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ajax 통신 연습</h1>
+    <p>
+        User: <input type="text" id="user" value="길동이"><br>
+        Message: <input type="text" id="message" value="만사형통"><br>
+        <button id="reqBtn">요청</button>
+    </p>
+    <div id="resultBox">
+        <ul></ul>
+    </div>
+
+    <script>
+        const xhr = new XMLHttpRequest();
+        const resultUl = document.querySelector("#resultBox ul");
+        // console.dir(resultList);
+        const reqBtn = document.querySelector("#reqBtn");
+        const user = document.querySelector("#user");
+        const message = document.querySelector("#message");
+
+        xhr.onload = function(e) {
+            let resObj = JSON.parse(e.target.responseText);
+
+            resObj.forEach(element => {
+                resultUl.innerHTML += `<li><message:>user: ${element.user}
+                | message: ${element.message}</li>`;
+            });
+
+        }
+
+        // [혼자 해 보기]
+        // 1. 입력된 user와 message를 서버의 userList 배열에 저장
+        // 2. ajax를 이용해서 서버의 userList를 받아서 ul 목록을 재구성
+        reqBtn.onclick = function(e) {
+            xhr.open("get", `/data?user=${user.value}&message=${message.value}`, true);
+            xhr.send();
+            resultUl.innerHTML = "";
+        }
+    </script>
+</body>
+</html>

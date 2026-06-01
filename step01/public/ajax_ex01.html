@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ajax 통신 연습</h1>
+
+        <script>
+        // console.log("여기는 브라우저 콘솔에 보여집니다.")
+        const xhr = new XMLHttpRequest();
+
+        console.dir(xhr);
+
+        // xhr.onreadystatechange = function(event) {
+        //     if(xhr.readyState == 4 && xhr.status == 200) {
+        //         console.log("Ajax 요청 완료!");
+        //         console.log("status: ", xhr.status);
+        //         console.log("readyState: ", xhr.readyState)
+        //     }
+        // };
+
+        // 로드가 되면 실행
+        xhr.onload = function(e) {
+            // console.log("Ajax 로드 완료");
+            // console.log(xhr == event.target);
+            let resTxt = e.target.responseText;
+            let resObj = JSON.parse(resTxt);
+            console.log(typeof resObj);
+            console.log(resObj.user);
+        }
+
+        // 목적지 설정: method, url, [true/false]
+        xhr.open("get", "/data?user=hong&message=kkkk", true);
+
+        // 실행 하라!
+        xhr.send();
+
+        console.log("비동기라면 맨하단의 여기가 먼저 실행됨.");
+    </script>
+</body>
+</html>
